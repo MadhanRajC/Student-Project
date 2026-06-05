@@ -1,0 +1,61 @@
+{% extends "includes/base.html" %}
+{% block title %}Student Details{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0">
+        <div class="row g-0">
+
+            <!-- Student Photo -->
+            <div class="col-md-4">
+                {% if student.photo %}
+                    <img src="{{ student.photo.url }}" class="img-fluid rounded-start" alt="Student Photo">
+                {% else %}
+                    <img src="https://via.placeholder.com/400x400?text=No+Photo" class="img-fluid rounded-start" alt="No Photo">
+                {% endif %}
+            </div>
+
+            <!-- Student Details -->
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title fw-bold">
+                        {{ student.first_name }} {{ student.last_name }}
+                    </h3>
+
+                    <hr>
+
+                    <p><strong>Roll Number:</strong> {{ student.roll_no }}</p>
+
+                    <p><strong>Email:</strong> {{ student.email }}</p>
+
+                    <p><strong>Department:</strong>
+                        {% if student.department %}
+                            {{ student.department }}
+                        {% else %}
+                            <span class="text-muted">Not Assigned</span>
+                        {% endif %}
+                    </p>
+                    <p><strong>Admission Date:</strong>
+                            {{ student.created_at | date:"F j, Y" }}
+                    </p>
+
+                    <hr>
+
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'student-update' student.id %}" class="btn btn-warning">
+                            Edit Student
+                        </a>
+                        <a href="{% url 'student-list' %}" class="btn btn-secondary">
+                            Back to List
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

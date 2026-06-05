@@ -1,0 +1,14 @@
+/* Hover Dropdown */
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0;
+}
+.dropdown-menu {
+  border-radius: 10px;
+}
+.nav-link i {
+  margin-right: 6px;
+}
+h6.fw-bold {
+  width: 190px;
+}

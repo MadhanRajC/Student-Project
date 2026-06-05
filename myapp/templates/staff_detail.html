@@ -1,0 +1,61 @@
+{% extends "includes/base.html" %}
+{% block title %}Staff Details{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0">
+        <div class="row g-0">
+
+            <!-- Student Photo -->
+            <div class="col-md-4">
+                {% if staff.photo %}
+                    <img src="{{ staff.photo.url }}" class="img-fluid rounded-start" alt="staff Photo">
+                {% else %}
+                    <img src="https://via.placeholder.com/400x400?text=No+Photo" class="img-fluid rounded-start" alt="No Photo">
+                {% endif %}
+            </div>
+
+            <!-- Student Details -->
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title fw-bold">
+                        {{ staff.name }}
+                    </h3>
+
+                    <hr>
+
+                    <p><strong>Staff ID:</strong> {{ staff.staff_id }}</p>
+
+                    <p><strong>Email:</strong> {{ staff.email }}</p>
+
+                    <p><strong>Department:</strong>
+                        {% if staff.department %}
+                            {{ staff.department }}
+                        {% else %}
+                            <span class="text-muted">Not Assigned</span>
+                        {% endif %}
+                    </p>
+                    <p><strong>Joined Date:</strong>
+                            {{ staff.created_at | date:"F j, Y" }}
+                    </p>
+
+                    <hr>
+
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'staff-update' staff.id %}" class="btn btn-warning">
+                            Edit Staff
+                        </a>
+                        <a href="{% url 'staff-list' %}" class="btn btn-secondary">
+                            Back to List
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

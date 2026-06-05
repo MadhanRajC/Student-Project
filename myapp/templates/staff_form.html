@@ -1,0 +1,81 @@
+{% extends "includes/base.html" %}
+
+{% block title %}Staff Form{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center">
+            <h4 class="m-0">Update Staff Details</h4>
+        </div>
+
+        <div class="card-body p-4">
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- First Name -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Staff Full Name</label>
+                    <input type="text" name="fullname" class="form-control" required 
+                           value="{{ staff.name }}">
+                </div>
+
+                <!-- Roll No -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Staff ID</label>
+                    <input type="text" name="staff_id" class="form-control" required
+                           value="{{ staff.staff_id }}">
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Staff Email</label>
+                    <input type="email" name="email" class="form-control" required
+                           value="{{ staff.email }}">
+                </div>
+
+                <!-- Department (STATIC OPTIONS) -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Department</label>
+                    <select name="department" class="form-select">
+                        <option value="">-- Select Department --</option>
+
+                        <option value="Computer Science" >Computer Science</option>
+                        <option value="Information Technology" >Information Technology</option>
+                        <option value="Electronics & Communication" >Electronics & Communication</option>
+                        <option value="Mechanical Engineering" >Mechanical Engineering</option>
+                        <option value="Civil Engineering" >Civil Engineering</option>
+                        <option value="Electrical Engineering" >Electrical Engineering</option>
+                        <option value="Arts & Science" >Arts & Science</option>
+
+                    </select>
+                </div>
+
+                <!-- Photo -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Upload Photo</label>
+                    <br>
+
+                    {% if staff.photo %}
+                        <img src="{{ staff.photo.url }}" class="mb-2 rounded" width="120">
+                        <br>
+                    {% endif %}
+
+                    <input type="file" name="photo" class="form-control">
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-success w-100 mb-2">Update Staff</button>
+
+                <a href="{% url 'staff-list' %}" class="btn btn-outline-secondary w-100">Cancel</a>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
